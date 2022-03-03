@@ -1,0 +1,243 @@
+Libreria matplotlib
+
+import matplotlib.pyplot as plt
+
+scatter
+
+# Basic scatter plot, log scale
+plt.scatter(gdp_cap, life_exp)
+plt.xscale('log') 
+
+# Strings
+xlab = 'GDP per Capita [in USD]'
+ylab = 'Life Expectancy [in years]'
+title = 'World Development in 2007'
+
+# Add axis labels
+plt.xlabel('GDP per Capita [in USD]')
+plt.ylabel('Life Expectancy [in years]')
+
+# Definition of tick_val and tick_lab
+tick_val = [1000, 10000, 100000]
+tick_lab = ['1k', '10k', '100k']
+
+# Adapt the ticks on the x-axis
+plt.xticks(tick_val, tick_lab)
+
+
+# Add title
+plt.title('World Development in 2007')
+
+# After customizing, display the plot
+plt.show()
+
+------------------------------------------------------------------------------------
+Other example
+
+plt.scatter(x = gdp_cap, y = life_exp, s = np.array(pop) * 2, c = col, alpha = 0.8)
+
+# s = tamaño de circulo, col = lista de colores por cada valor (Se ha mapeado con un diccionario primero),alpha = opacidad 
+------------------------------------------------------------------------------------
+# Additional customizations, añadir texto grafico
+plt.text(1550, 71, 'India')
+plt.text(5700, 80, 'China')
+
+# Add grid() call
+plt.grid(True)
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+====================================================================================
+Libreria numpy 
+import numpy as np
+recorrer numpy array for
+
+# For loop unidimiendional
+for i in np_height:
+    print(str(i) + ' inches')
+
+# For loop multidimensional
+for i in np.nditer(np_baseball):
+    print(i)
+
+# generar numero aleatorio entre dos enteros
+dado = np.random.randint(1,7)
+------------------------------------------------------------------------------------
+generar una funcion grado n, guarda en a el slope o pendiente y e b el intercept
+
+a, b = np.polyfit(illiteracy, fertility, n)
+
+------------------------------------------------------------------------------------
+def bootstrap_replicate_1d(data, func):
+    """Generate bootstrap replicate of 1D data."""
+    bs_sample = np.random.choice(data, len(data))
+    return func(bs_sample)
+
+------------------------------------------------------------------------------------
+construir funcion grado 1 linea bootstrap pairs
+
+def draw_bs_pairs_linreg(x, y, size=1):
+    """Perform pairs bootstrap for linear regression."""
+
+    # Set up array of indices to sample from: inds
+    inds = np.arange(len(x))
+
+    # Initialize replicates: bs_slope_reps, bs_intercept_reps
+    bs_slope_reps = np.empty(size)
+    bs_intercept_reps = np.empty(size)
+
+    # Generate replicates
+    for i in range(size):
+        bs_inds = np.random.choice(inds, size=len(inds))
+        bs_x, bs_y = x[bs_inds], y[bs_inds]
+        bs_slope_reps[i], bs_intercept_reps[i] = np.polyfit(bs_x, bs_y, 1)
+
+    return bs_slope_reps, bs_intercept_reps
+
+------------------------------------------------------------------------------------
+
+funcion que une o concatena dos conjuntos de dtos los reordena y saca dos conjuntos, hipotesis nula
+
+def permutation_sample(data1, data2):
+    """Generate a permutation sample from two data sets."""
+
+    # Concatenate the data sets: data
+    data = np.concatenate((data1,data2))
+
+    # Permute the concatenated array: permuted_data
+    permuted_data = np.random.permutation(data)
+
+    # Split the permuted array into two: perm_sample_1, perm_sample_2
+    perm_sample_1 = permuted_data[:len(data1)]
+    perm_sample_2 = permuted_data[len(data1):]
+
+    return perm_sample_1, perm_sample_2
+
+====================================================================================
+Libreria pandas
+import pandas as pd
+
+leer dataframe 
+cars = pd.read_csv("cars.csv", sep = ';', index_col=0)
+
+#procesar dataset grande largo 
+# Initialize an empty dictionary: counts_dict
+counts_dict = {}
+
+# Iterate over the file chunk by chunk
+for chunks in pd.read_csv('tweets.csv', chunksize = 10):
+
+    # Iterate over the column in DataFrame
+    for entry in chunks["lang"]:
+        if entry in counts_dict.keys():
+            counts_dict[entry] += 1
+        else:
+            counts_dict[entry] = 1
+
+------------------------------------------------------------------------------------
+# recorrer dataframe
+for lab, row in cars.iterrows():
+
+====================================================================================
+
+# areas list
+areas = [11.25, 18.0, 20.0, 10.75, 9.50]
+
+# recorrer lista, index y valor for
+for index, area in enumerate(areas) :
+------------------------------------------------------------------------------------
+
+# Definition of dictionary
+europe = {'spain':'madrid', 'france':'paris', 'germany':'berlin',
+          'norway':'oslo', 'italy':'rome', 'poland':'warsaw', 'austria':'vienna' }
+          
+# recorrer diccionario for
+for key, value in europe.items():
+
+
+------------------------------------------------------------------------------------
+# aplicar una funcion a cada valor de una lista 
+
+# Use map() to apply a lambda function over spells: shout_spells
+shout_spells = map(lambda item: item + "!!!", spells)
+
+# Convert shout_spells to a list: shout_spells_list
+shout_spells_list = list(shout_spells)
+
+# filtrar lista con un criterio
+
+result = filter(lambda member: len(member) > 6, fellowship)
+
+# Convert result to a list: result_list
+result_list = list(result)
+
+------------------------------------------------------------------------------------
+siendo mutants y powers una lista con varios valores, cuando haces zip te pone cada par de valores con mismo indice en una tupla, cuano haces unzip, ste los vuelve a dejar como estaban
+
+
+# Create a zip object from mutants and powers: z1
+z1 = zip(mutants, powers)
+
+# Print the tuples in z1 by unpacking with *
+print(*z1)
+
+# Re-create a zip object from mutants and powers: z1
+z1 = zip(mutants, powers)
+
+# 'Unzip' the tuples in z1 by unpacking with * and zip(): result1, result2
+result1, result2 = zip(*z1)
+
+------------------------------------------------------------------------------------
+
+list comprehensions 
+# Create a 5 x 5 matrix using a list of lists: matrix
+matrix = [[col for col in range(5)] for row in range(5)]
+
+list comprehension con una condicion 
+# Create list comprehension: new_fellowship
+new_fellowship = [member for member in fellowship if len(member) >=7]
+
+# Create list comprehension: new_fellowship
+new_fellowship = [member if len(member) >= 7 else "" for member in fellowship]
+
+dict comprehension 
+
+# Create dict comprehension: new_fellowship
+new_fellowship = {member : len(member) for member in fellowship}
+
+---------------------------------------------------------------------------------
+funcion ecdf
+def ecdf(data):
+    """Compute ECDF for a one-dimensional array of measurements."""
+    # Number of data points: n
+    n = len(data)
+
+    # x-data for the ECDF: x
+    x = np.sort(data)
+
+    # y-data for the ECDF: y
+    y = np.arange(1, (n + 1))/ n
+    return x, y
+
+---------------------------------------------------------------------------------------
+funcion pearson 
+
+def pearson_r(x, y):
+    """Compute Pearson correlation coefficient between two arrays."""
+    # Compute correlation matrix: corr_mat
+    corr_mat = np.corrcoef(x, y)
+
+    # Return entry [0,1]
+    return corr_mat[0,1]
+------------------------------------------------------------------------------------------------
+covarianza
+
+covariance_matrix = np.cov(versicolor_petal_length, versicolor_petal_width)
+
+[0,0] varianza de x
+[1,1] varianza de y
+[0,1] o [1,0] covarianza de x e y
+
+-------------------------------------------------------------
